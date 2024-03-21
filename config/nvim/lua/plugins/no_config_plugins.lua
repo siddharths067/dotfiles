@@ -7,6 +7,11 @@ return {
 	    "williamboman/mason.nvim",
 	    "williamboman/mason-lspconfig.nvim",
 	    "neovim/nvim-lspconfig",
+	},
+	{
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate'
 	}
+
 }
 
