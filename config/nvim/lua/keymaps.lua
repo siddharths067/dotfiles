@@ -22,11 +22,8 @@ wk.register({
 			"<cmd>Telescope lsp_document_symbols<cr>", "Symbols"
 		},
 		S = {
-			"<cmd>Telescope lsp_workspace_symbols<cr>", "Symbols"
-		}
-	},
-	g = {
-		name = 'Go to',
+			"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"
+		},
 		r = {
 			"<cmd>Telescope lsp_references<cr>", 'References'
 		},
@@ -50,5 +47,3 @@ wk.register({
 		}
 	}
 }, {prefix="<leader>"})
-
-
