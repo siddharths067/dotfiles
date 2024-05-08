@@ -7,6 +7,10 @@ local project_root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'},
 local project_name = vim.fn.fnamemodify(project_root_dir, ':p:h:t');
 local workspace_dir = vim.fn.getenv('HOME') .. '/.local/share/eclipse/' .. project_name;
 
+local resources_folder = vim.fn.stdpath("config") .. '/resources';
+local bundles = vim.split(vim.fn.glob(resources_folder .. "/*.jar", 1), "\n");
+
+
 
 local config = {
 	capabilities = lsp_capabilities,
@@ -15,6 +19,9 @@ local config = {
 	    '-data', workspace_dir
 	},
 	root_dir = project_root_dir,
+	init_options = {
+		bundles = bundles
+	}
 }
 require('jdtls').start_or_attach(config)
 
