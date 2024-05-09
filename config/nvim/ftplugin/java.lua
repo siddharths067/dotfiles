@@ -49,6 +49,11 @@ wk.register(
 			},
 			r = {"<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"}
 		},
+		t = {
+			name = "Test",
+			c = {"<cmd>lua require('jdtls').test_class();vim.cmd('DapToggleRepl')<cr>", "Class"},
+			m = {"<cmd>lua require('jdtls').test_nearest_method();vim.cmd('DapToggleRepl')<cr>", "Method"}
+		}
 	},
 	{
 		prefix = "<leader>",
