@@ -1,16 +1,21 @@
 local wk = require('which-key')
-
-
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities();
 
 local project_root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]);
 local project_name = vim.fn.fnamemodify(project_root_dir, ':p:h:t');
 local workspace_dir = vim.fn.getenv('HOME') .. '/.local/share/eclipse/' .. project_name;
+local mason_data_folder = vim.fn.stdpath("data") .. '/mason/packages/'
+local bundles = {};
 
-local resources_folder = vim.fn.stdpath("config") .. '/resources';
-local bundles = vim.split(vim.fn.glob(resources_folder .. "/*.jar", 1), "\n");
-
-
+for _, folder in pairs({
+	mason_data_folder .. "java-test/extension/server/*.jar",
+	mason_data_folder .. "java-debug-adapter/extension/server/*.jar"
+}) do
+	vim.list_extend(
+		bundles,
+		vim.split(vim.fn.glob(folder), "\n")
+	)
+end
 
 local config = {
 	capabilities = lsp_capabilities,
