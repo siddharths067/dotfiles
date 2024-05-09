@@ -1,9 +1,16 @@
 local cmp = require('cmp')
 local lspconfig = require('lspconfig');
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities();
-
-
 local lspkind = require('lspkind')
+local masonregistry = require('mason-registry');
+
+local mason_all = {};
+local mason_ls = {"lua-language-server",  "jdtls"};
+local mason_non_ls = {"java-debug-adapter", "java-test"};
+
+vim.list_extend(mason_all, mason_ls);
+vim.list_extend(mason_all, mason_non_ls);
+
 require("mason").setup({
     ui = {
         icons = {
@@ -15,15 +22,20 @@ require("mason").setup({
 })
 
 
+for idx, pkg in pairs(mason_all) do
+	if masonregistry.is_installed(pkg) == false then
+		vim.cmd(string.format("MasonInstall %s", pkg));
+	end
+end
+
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "rust_analyzer", "jdtls" },
     automatic_installation = true
 }
 
+lspconfig.lua_ls.setup {
+	capabilities = lsp_capabilities
+}
 
-lspconfig.lua_ls.setup({
-	capabilities = lsp_capabilities,
-});
 
 cmp.setup {
 	sources = {

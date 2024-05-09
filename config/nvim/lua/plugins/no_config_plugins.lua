@@ -1,12 +1,13 @@
 return {
 	{
-	    'nvim-telescope/telescope.nvim', tag = '0.1.6',
-	    dependencies = { 'nvim-lua/plenary.nvim' }
+		'nvim-telescope/telescope.nvim', tag = '0.1.6',
+		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 	{
-	    "williamboman/mason.nvim",
-	    "williamboman/mason-lspconfig.nvim",
-	    "neovim/nvim-lspconfig",
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+		'mfussenegger/nvim-dap'
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
