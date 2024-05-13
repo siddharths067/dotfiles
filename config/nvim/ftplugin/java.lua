@@ -34,6 +34,30 @@ require('jdtls').start_or_attach(config)
 
 
 -- Binding JDTLS key mappings
+wk.register(
+	{
+		d = {
+			name = "Debug",
+			b = {
+				"<cmd>DapToggleBreakpoint<cr>", "Toggle Breakpoint"
+			},
+			i = {
+				"<cmd>DapStepInto<cr>", "Step Into"
+			},
+			c = {
+				"<cmd>DapContinue<cr>", "Continue"
+			},
+			e = {
+				"<cmd>lua require'dap'.repl.open()<cr>", "Eval Expression"
+			}
+
+		}
+	},
+	{
+		prefix = "<leader>",
+		mode = "n"
+	}
+);
 
 wk.register(
 	{
