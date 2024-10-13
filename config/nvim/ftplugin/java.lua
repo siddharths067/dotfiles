@@ -1,3 +1,4 @@
+require('dapui').setup()
 local wk = require('which-key')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities();
 
@@ -34,73 +35,42 @@ require('jdtls').start_or_attach(config)
 
 
 -- Binding JDTLS key mappings
-wk.register(
+wk.add(
 	{
-		d = {
-			name = "Debug",
-			b = {
-				"<cmd>DapToggleBreakpoint<cr>", "Toggle Breakpoint"
-			},
-			i = {
-				"<cmd>DapStepInto<cr>", "Step Into"
-			},
-			c = {
-				"<cmd>DapContinue<cr>", "Continue"
-			},
-			e = {
-				"<cmd>lua require'dap'.repl.open()<cr>", "Eval Expression"
-			}
-
-		}
-	},
-	{
-		prefix = "<leader>",
-		mode = "n"
-	}
-);
-
-wk.register(
-	{
-		c = {
-			name = "Code",
-			o = {
-				"<cmd>lua require('jdtls').organize_imports()<cr>", "Organise Imports"
-			},
-			e = {
-				name = 'Extract',
-				v = {"<cmd>lua require('jdtls').extract_variable()<cr>", 'Variable'},
-				c = {"<cmd>lua require('jdtls').extract_constant()<cr>", 'Constant'},
-			},
-			r = {"<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"}
-		},
-		t = {
-			name = "Test",
-			c = {"<cmd>lua require('jdtls').test_class();vim.cmd('DapToggleRepl')<cr>", "Class"},
-			m = {"<cmd>lua require('jdtls').test_nearest_method();vim.cmd('DapToggleRepl')<cr>", "Method"}
-		}
-	},
-	{
-		prefix = "<leader>",
-		mode = "n"
+		{ "<leader>d", group = "Debug" },
+		{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle Breakpoint" },
+		{ "<leader>dc", "<cmd>DapContinue<cr>", desc = "Continue" },
+		{ "<leader>de", "<cmd>lua require'dap'.repl.open()<cr>", desc = "Eval Expression" },
+		{ "<leader>di", "<cmd>DapStepInto<cr>", desc = "Step Into" },
 	}
 );
 
 
+wk.add(
+	{
+		{ "<leader>c", group = "Code" },
+		{ "<leader>ce", group = "Extract" },
+		{ "<leader>cec", "<cmd>lua require('jdtls').extract_constant()<cr>", desc = "Constant" },
+		{ "<leader>cev", "<cmd>lua require('jdtls').extract_variable()<cr>", desc = "Variable" },
+		{ "<leader>co", "<cmd>lua require('jdtls').organize_imports()<cr>", desc = "Organise Imports" },
+		{ "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
 
-wk.register(
+		{ "<leader>t", group = "Test" },
+		{ "<leader>tc", "<cmd>lua require('jdtls').test_class();vim.cmd('DapToggleRepl')<cr>", desc = "Class" },
+		{ "<leader>tm", "<cmd>lua require('jdtls').test_nearest_method();vim.cmd('DapToggleRepl')<cr>", desc = "Method" },
+	}
+);
+
+
+wk.add(
 	{
-		c = {
-			name = "Code",
-			e = {
-				name = 'Extract',
-				v = {"<esc><cmd>lua require('jdtls').extract_variable_all(true)<cr>", 'Variable (All Instances)'},
-				c = {"<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", 'Constant'},
-				m = {"<esc><cmd>lua require('jdtls').extract_method(true)<cr>", 'Method'},
-			}
+		{
+			mode = { "v" },
+			{ "<leader>c", group = "Code" },
+			{ "<leader>ce", group = "Extract" },
+			{ "<leader>cec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", desc = "Constant" },
+			{ "<leader>cem", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", desc = "Method" },
+			{ "<leader>cev", "<esc><cmd>lua require('jdtls').extract_variable_all(true)<cr>", desc = "Variable (All Instances)" },
 		},
-	},
-	{
-		prefix = "<leader>",
-		mode = "v"
 	}
 );
