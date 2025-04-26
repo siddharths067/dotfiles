@@ -13,4 +13,8 @@ fi
 
 ln -sf $PWD/zsh_custom.zsh $ZSH/custom/zsh_custom.zsh 
 
+sudo tar -xvf  tarball_packages/nvim-linux-x86_64.tar.gz -C /usr/local/stow 
 
+cd /usr/local/stow
+sudo stow nvim-linux-x86_64 -vv 
+cd $PWD
