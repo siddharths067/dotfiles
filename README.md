@@ -1,2 +1,2 @@
 # dotfiles
-Repository for dotfiles and software I need for my development
+Repository for dotfiles and some pre-compiled software I need
